@@ -13,8 +13,12 @@ class PostController {
         this.modalBody;
         this.modalPublicCheck;
         this.modalFeaturedCheck;
+        this.modalSubtitle;
+        this.modalAuthor;
+        this.modalTag;
+        this.modalCreated_date;
         this.addPostBtn;
-
+        this.postTag = [];
         this.editMode = false;
         this.editedPostId = null;
         this.editedPost = null;
@@ -31,6 +35,10 @@ class PostController {
             this.modalBody = $("#postBody");
             this.modalPublicCheck = $("#publiCheck");
             this.modalFeaturedCheck = $("#featuredCheck");
+            this.modalSubtitle = $("#postSubtitle");;
+            this.modalAuthor = $("#postAuthor");;
+            this.modalTag = $("#postTag");;
+            this.modalCreated_date = $("#postDate");;
             this.addPostBtn = $("#saveBtn");
 
             this.addPostBtn.click(function () {
@@ -41,14 +49,18 @@ class PostController {
                     this.editedPost.body = this.modalBody.val();
                     this.editedPost.public = this.modalPublicCheck.is(":checked");
                     this.editedPost.featured = this.modalFeaturedCheck.is(":checked");
-                    this.updatePost(this.editedPost);
+                    this.patchPost(this.editedPost);
                 } else {
 
-                    var post = new Post(
+                    var post = new Post(                        
+                        this.modalAuthor.val(),
                         this.modalTitle.val(),
+                        this.modalSubtitle.val(),
                         this.modalBody.val(),
                         this.modalPublicCheck.is(":checked"),
-                        this.modalFeaturedCheck.is(":checked")
+                        this.modalFeaturedCheck.is(":checked"),
+                        this.modalCreated_date.val(),
+                        this.modalTag.val()
                     );
                     this.newPost(post);
 
@@ -116,7 +128,7 @@ class PostController {
                 this.updateUIPost(post);
                 this.editMode = false;
                 this.editedPost = null;
-                location.reload(true);
+                //location.reload(true);
 
             }.bind(this)
         )
@@ -139,7 +151,7 @@ class PostController {
 
     getPosts() {
         this.restController.get("http://localhost:3000/posts", function (data, status, xhr) {
-            //console.log("data", data);
+            console.log("data", data);
             for (var id in data) {
                 var post = data[id];
                 //console.log("posts", post)
@@ -154,32 +166,47 @@ class PostController {
     newPost(post) {
         //api call
         var data = {
+            "author": post.author,
             "title": post.title,
+            "subtitle": post.subtitle,
             "body": post.body,
+            "public": post.public,
             "featured": post.featured,
-            "public": post.public
+            "created_date": post.created_date,
+            "tag": post.tag
         }
+       
 
 
         this.restController.post("http://localhost:3000/posts", data, function () {
             this.createUIPost(post);
-
+            console.log(data);
         }.bind(this));
 
     }
 
 
     createUIPost(post) {
+        console.log("post",post)
+
         var postContainer = $("#postContainer").clone();
         postContainer.css("display", "block");
         postContainer.attr("id", "");
         postContainer.addClass("class", "postContainer");
 
+        var postAuthor = postContainer.find(".card-author");
         var postHeader = postContainer.find(".card-header");
+        var postSubtitle = postContainer.find(".subtitle");
         var postBody = postContainer.find(".card-text");
+        var postDate = postContainer.find(".card-date");
+        var postTag = postContainer.find(".card-tag");
 
-        postHeader.html(post.title);
+        postAuthor.html(post.author);
         postBody.html(post.body);
+        postHeader.html(post.title);
+        postSubtitle.html(post.subtitle);
+        postDate.html(post.created_date);
+        postTag.html(post.tag.toString());
 
         postContainer.find("#editPost").click(function () {
             this.editMode = true;
