@@ -1,0 +1,28 @@
+body{
+    background: url('../img/white.gif') no-repeat center center fixed;
+    background-size: cover;
+}
+
+footer{
+    background-color: #263238;
+}
+
+footer p {
+    color:#eceff1;
+}
+
+.divArticle{
+    column-count:2;   
+}
+
+.commentsSection{
+    color:black;
+    font-family: Helvetica;
+    font-size: 1.875em;
+}
+
+.card{
+    border: 3px solid;
+}
+
+

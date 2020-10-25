@@ -1,0 +1,1 @@
+new ArticlePageController().init();

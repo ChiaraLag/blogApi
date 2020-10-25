@@ -28,10 +28,7 @@
                     <a class="nav-link" href="index.html">Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="autori.html">Autori</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="articoli-html">Articoli</a>
+                    <a class="nav-link" href="articles.html">Articoli</a>
                 </li>
             </ul>
         </div>
@@ -45,23 +42,25 @@
 
     <section class="container">
         <div class="row" id="postsRow">
-            <div class="col-md-4 " id="postContainer" style="display : none">
+            <div class="col-md-4" id="postContainer" style="display : none">
                 <div class="card my-1" id="first-article">
                     <header class="card-header"></header>
+                    <img src="" class="card-img-top">
                     <article class="card-body">
                         <h5 class="card-title subtitle"></h5>
-                        <p class="card-text"></p>
                     </article>
-                    <footer>
+                    <footer class="pl-4 pb-2">
                         <p class="card-author"></p>
                         <p class="card-date"></p>
                         <p class="card-tag"></p>
                         <a href="#" class="card-link" id="editPost">modifica</a>
                         <a href="#" class="card-link" id="deletePost">elimina</a>
+                        <a href="#" class="card-link" id="readPost">vai all'articolo</a>
+                        
                     </footer>
-                </div>
-
             </div>
+
+        </div>
         </div>
 
     </section>
@@ -80,15 +79,19 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                        <label for="postImg">Immagine</label>
+                        <input type="text" class="form-control" id="postImg">
+                    </div>
+                    <div class="postAuthor">
                         <label for="exampleInputNome">Autore</label>
                         <input type="text" class="form-control" id="postAuthor">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputNome">Titolo</label>
+                        <label for="postTitle">Titolo</label>
                         <input type="text" class="form-control" id="postTitle">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputNome">Sottotitolo</label>
+                        <label for="postSubtitle">Sottotitolo</label>
                         <input type="text" class="form-control" id="postSubtitle">
                     </div>
                     <div class="form-group">
@@ -113,8 +116,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputNome">Data</label>
+                        <label for="postDate">Data</label>
                         <input type="date" class="form-control" id="postDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="postTag">Tag</label>
+                        <input class="form-control" id="postTag">
                     </div>
                 </div>
                 <div class="modal-footer">

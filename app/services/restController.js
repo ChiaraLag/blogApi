@@ -13,6 +13,24 @@ class RestController{
 
     }
 
+    getArticle(url,onSuccess,onError){
+        $.get({
+            url: url,
+            success: onSuccess
+          });
+
+
+    }
+
+    getCommentsArticle(url,onSuccess,onError){
+        $.get({
+            url: url,
+            success: onSuccess
+          });
+
+
+    }
+
     post(url,data,onSuccess,onError){
         $.post({
             url: url,
@@ -47,6 +65,25 @@ class RestController{
         $.ajax({
             url: url,
             type: 'DELETE',
+            contentType: "application/json",
+            success: onSuccess
+        });
+    }
+
+    getComments(url,onSuccess,onError){
+        $.get({
+            url: url,
+            success: onSuccess
+          });
+
+
+    }
+
+    hideComment(url,data,onSuccess,onError){
+        $.ajax({
+            url: url,
+            type: 'PATCH',
+            data:JSON.stringify(data),
             contentType: "application/json",
             success: onSuccess
         });
